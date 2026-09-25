@@ -16,7 +16,7 @@
  * `repairChecker`'s own comment for the disclosed heuristic this build does NOT claim solves that.
  */
 import { cell, told, utterance } from '@red-cup-engineering/computer-data-engineering-services-section/signcell/cell';
-import { readingOfSides } from '@red-cup-engineering/computer-code-engineering-services-section/signchain/bilattice';
+import { readingOfSides } from '@red-cup-engineering/computer-data-engineering-services-section/signcell/cell';
 import { site } from '@red-cup-engineering/computer-networking-engineering-services-section/signgraph/site';
 import { cohomologyOfCells } from '@red-cup-engineering/computer-networking-engineering-services-section/signgraph/cohomology';
 import { settleCells } from '@red-cup-engineering/computer-systems-engineering-services-section/signcraft/settle';
