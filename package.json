@@ -26,6 +26,9 @@
   ],
   "dependencies": {
     "@lenticule-science/metrologic": "0.3.0",
+    "@red-cup-engineering/computer-code-engineering-services-section": "0.1.0",
+    "@red-cup-engineering/computer-data-engineering-services-section": "0.1.0",
+    "@red-cup-engineering/computer-networking-engineering-services-section": "0.1.0",
     "@red-cup-engineering/computer-systems-engineering-services-section": "0.1.0",
     "@red-cup-engineering/computer-web-server": "0.6.0",
     "@red-cup-engineering/education-platform-service": "0.2.5",

@@ -9,7 +9,8 @@
 import assert from 'node:assert/strict';
 import { test, describe } from 'node:test';
 import { articulate, predicate, posit, settle } from '@red-cup-engineering/computer-systems-engineering-services-section/signcraft/descent';
-import { cohomologyOfRelation } from '@red-cup-engineering/computer-systems-engineering-services-section/signcraft/cochain';
+import { cohomologyOfCells } from '@red-cup-engineering/computer-networking-engineering-services-section/signgraph/cohomology';
+const cohomologyOfRelation = (cells) => { const r = cohomologyOfCells(cells); return { entities: r.entities, H0: { rank: r.zeroCohomology.rank }, H1: { rank: r.firstCohomology.rank } }; };
 import { settling, classify, h1 } from '@lenticule-science/metrologic/obstruction/settling';
 import {
   distinguishChecker,
@@ -18,17 +19,17 @@ import {
   settleChecker,
   observeChecker,
   repairChecker,
-  nameOfCharge,
+  readingOfValue,
   equivoCheckers,
   MVP_KINDS,
 } from '../registry.mjs';
 
-describe('nameOfCharge -- the FOUR-value bilattice naming table', () => {
+describe('readingOfValue -- the FOUR-value bilattice naming table', () => {
   test('[F,F]=absurd, [T,F]=potential, [F,T]=active, [T,T]=stable', () => {
-    assert.equal(nameOfCharge([false, false]), 'absurd');
-    assert.equal(nameOfCharge([true, false]), 'potential');
-    assert.equal(nameOfCharge([false, true]), 'active');
-    assert.equal(nameOfCharge([true, true]), 'stable');
+    assert.equal(readingOfValue([false, false]), 'absurd');
+    assert.equal(readingOfValue([true, false]), 'potential');
+    assert.equal(readingOfValue([false, true]), 'active');
+    assert.equal(readingOfValue([true, true]), 'stable');
   });
 });
 

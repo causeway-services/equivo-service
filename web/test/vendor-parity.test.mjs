@@ -18,14 +18,15 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { articulate, predicate, posit, settle } from '@red-cup-engineering/computer-systems-engineering-services-section/signcraft/descent';
-import { cohomologyOfRelation } from '@red-cup-engineering/computer-systems-engineering-services-section/signcraft/cochain';
+import { cohomologyOfCells } from '@red-cup-engineering/computer-networking-engineering-services-section/signgraph/cohomology';
+const cohomologyOfRelation = (cells) => { const r = cohomologyOfCells(cells); return { entities: r.entities, H0: { rank: r.zeroCohomology.rank }, H1: { rank: r.firstCohomology.rank } }; };
 import { settling, classify, h1 } from '@lenticule-science/metrologic/obstruction/settling';
 
 import { hydrateExercises as hydrateReal } from '@red-cup-engineering/education-platform-service/checker';
 import { equivoCheckers as realCheckers } from '../../themes/equivo/registry.mjs';
 import { hydrateExercises as hydrateVendor } from '../js/vendor/src/checker.js';
 import { equivoCheckers as vendorCheckers, nameOfCharge as vendorNameOfCharge } from '../js/vendor/themes/equivo/registry.js';
-import { nameOfCharge as realNameOfCharge } from '../../themes/equivo/registry.mjs';
+import { readingOfValue as realNameOfCharge } from '../../themes/equivo/registry.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const WORLD_PATH = join(HERE, '..', '..', 'data', 'world-equivo.json');

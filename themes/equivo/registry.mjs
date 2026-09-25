@@ -15,22 +15,33 @@
  * from the launch curriculum because no fair "genuine repair vs. evasion" rule exists yet; see
  * `repairChecker`'s own comment for the disclosed heuristic this build does NOT claim solves that.
  */
-import { articulate, predicate, posit, settle } from '@red-cup-engineering/computer-systems-engineering-services-section/signcraft/descent';
-import { cohomologyOfRelation } from '@red-cup-engineering/computer-systems-engineering-services-section/signcraft/cochain';
+import { cell, told, utterance } from '@red-cup-engineering/computer-data-engineering-services-section/signcell/cell';
+import { readingOfSides } from '@red-cup-engineering/computer-code-engineering-services-section/signchain/bilattice';
+import { site } from '@red-cup-engineering/computer-networking-engineering-services-section/signgraph/site';
+import { cohomologyOfCells } from '@red-cup-engineering/computer-networking-engineering-services-section/signgraph/cohomology';
+import { settleCells } from '@red-cup-engineering/computer-systems-engineering-services-section/signcraft/settle';
 import { settling, classify, h1 } from '@lenticule-science/metrologic/obstruction/settling';
 
 // ---------------------------------------------------------------------------------------
 // Shared helpers
 // ---------------------------------------------------------------------------------------
 
-/** The FOUR-valued bilattice charge names, `bilattice/src/charge.mjs`'s own table:
- * [F,F] absurd, [T,F] potential, [F,T] active, [T,T] stable. */
-export function nameOfCharge(value) {
-  const [pos, neg] = value;
-  if (!pos && !neg) return 'absurd';
-  if (pos && !neg) return 'potential';
-  if (!pos && neg) return 'active';
-  return 'stable';
+/** The knowledge reading of a told pair [for, against]: [F,F] absurd, [T,F] potential, [F,T] active,
+ * [T,T] stable (SignChain). */
+export function readingOfValue(value) {
+  return readingOfSides('knowledge', value[0], value[1]);
+}
+
+/** An utterance's reflexive cell: its claim about its token. */
+function utteranceCell(spec, evidence) {
+  const [token, claim] = spec.utterance;
+  return cell(token, claim, token, evidence);
+}
+
+/** The cohomology the settle and repair checkers read: entities, H0 rank, H1 rank (SignGraph). */
+function relationCohomology(cells) {
+  const reading = cohomologyOfCells(cells);
+  return { entities: reading.entities, H0: { rank: reading.zeroCohomology.rank }, H1: { rank: reading.firstCohomology.rank } };
 }
 
 function deepEqual(a, b) {
@@ -47,7 +58,8 @@ function deepEqual(a, b) {
 export function distinguishChecker(spec, answer) {
   let result;
   try {
-    result = articulate(spec.utterance);
+    const said = utterance(...spec.utterance);
+    result = { potential: [said.token, said.claim] };
   } catch (err) {
     return { pass: false, diagnosis: `the utterance itself is malformed: ${err instanceof Error ? err.message : String(err)}` };
   }
@@ -68,9 +80,8 @@ export function distinguishChecker(spec, answer) {
  * real `predicate(articulate(utterance))` and compares the resulting cell-set's entity-set and
  * predicate-set to the player's answer -- structural, not string, match. */
 export function relateChecker(spec, answer) {
-  const category = predicate(articulate(spec.utterance));
-  const cellSet = (category)['cell-set'];
-  const actual = { entities: cellSet['entity-set'].entities, predicates: cellSet['predicate-set'].predicates };
+  const related = site([utteranceCell(spec)]);
+  const actual = { entities: related.entities, predicates: related.predicates };
   const pass = deepEqual(actual.entities, answer.entities) && deepEqual(actual.predicates, answer.predicates);
   return {
     pass,
@@ -81,38 +92,35 @@ export function relateChecker(spec, answer) {
 }
 
 // ---------------------------------------------------------------------------------------
-// C -- measure: posit(predicate(articulate(utterance))), settled charge value
+// C -- measure: posit(predicate(articulate(utterance))), settled reading
 // ---------------------------------------------------------------------------------------
 
 /** equivo-design.md §5.1, reproduced as the shipped checker verbatim (down to the settled-cell
- * read path). Player assigns a FOUR-value charge from evidence; the checker runs the real
- * descent (posit -> settle) and compares the settled cell's `charge.value` bits to the player's
+ * read path). Player assigns a four-valued reading from evidence; the checker runs the real
+ * descent (posit -> settle) and compares the settled cell's told sides to the player's
  * claim. */
 export function measureChecker(spec, answer) {
-  const category = posit(predicate(articulate(spec.utterance)));
-  const settled = settle(category);
-  const cell = (settled)
-    .sheaf.section['fiber-algebras'][0]?.assignments[0];
-  if (!cell) return { pass: false, diagnosis: 'the descent produced no settled cell -- malformed spec' };
-  const actual = cell.charge.value;
+  const settled = settleCells([utteranceCell(spec, { for: [spec.utterance] })]).settled[0];
+  if (!settled) return { pass: false, diagnosis: 'the descent produced no settled cell -- malformed spec' };
+  const actual = told(settled);
   const pass = actual[0] === answer.value[0] && actual[1] === answer.value[1];
   return {
     pass,
     diagnosis: pass
-      ? `correct -- settles to [${actual}] (${nameOfCharge(actual)}), evidence positive=${JSON.stringify(cell.charge.evidence[0])}`
-      : `the descent settles to [${actual}] (${nameOfCharge(actual)}), you answered [${answer.value}] (${nameOfCharge(answer.value)})`,
+      ? `correct -- settles to [${actual}] (${readingOfValue(actual)}), evidence for=${JSON.stringify(settled.for)}`
+      : `the descent settles to [${actual}] (${readingOfValue(actual)}), you answered [${answer.value}] (${readingOfValue(answer.value)})`,
   };
 }
 
 // ---------------------------------------------------------------------------------------
-// D -- settle/equivalence: cohomologyOfRelation(cells), H0.rank === 1
+// D -- settle/equivalence: relationCohomology(cells), H0.rank === 1
 // ---------------------------------------------------------------------------------------
 
 /** equivo-design.md §5.2, reproduced as the shipped checker verbatim. Player claims whether a
  * proposed relation settles to one connected component (one equivalence class); the checker runs
  * the real `cohomologyOfRelation` and reads `H0.rank === 1` off the graph's own connectivity. */
 export function settleChecker(spec, answer) {
-  const result = cohomologyOfRelation(spec.cells);
+  const result = relationCohomology(spec.cells);
   const actuallyEquivalent = result.H0.rank === 1;
   const pass = actuallyEquivalent === answer.claim;
   return {
@@ -160,8 +168,8 @@ export function observeChecker(spec, answer) {
  * disclosed, and unused in play -- the honest state the design doc itself describes.
  */
 export function repairChecker(spec, answer) {
-  const before = cohomologyOfRelation(spec.cells);
-  const after = cohomologyOfRelation(answer.cells);
+  const before = relationCohomology(spec.cells);
+  const after = relationCohomology(answer.cells);
   const beforeEntities = new Set(before.entities);
   const afterEntities = new Set(after.entities);
   const keptEveryEntity = [...beforeEntities].every((e) => afterEntities.has(e));

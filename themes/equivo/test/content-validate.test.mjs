@@ -23,7 +23,8 @@
 import assert from 'node:assert/strict';
 import { test, describe } from 'node:test';
 import { articulate, predicate, posit, settle } from '@red-cup-engineering/computer-systems-engineering-services-section/signcraft/descent';
-import { cohomologyOfRelation } from '@red-cup-engineering/computer-systems-engineering-services-section/signcraft/cochain';
+import { cohomologyOfCells } from '@red-cup-engineering/computer-networking-engineering-services-section/signgraph/cohomology';
+const cohomologyOfRelation = (cells) => { const r = cohomologyOfCells(cells); return { entities: r.entities, H0: { rank: r.zeroCohomology.rank }, H1: { rank: r.firstCohomology.rank } }; };
 import { settling, classify, h1 } from '@lenticule-science/metrologic/obstruction/settling';
 import { buildEquivoWorld } from '../build-world.mjs';
 import { hydrateExercises, roomGateStatus } from '@red-cup-engineering/education-platform-service/checker';
