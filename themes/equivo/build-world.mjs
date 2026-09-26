@@ -1,8 +1,10 @@
 /**
  * `build-world` -- Equivo's own build script (self-education-platform-design.md §9 step 4:
  * "Equivo ships as a new theme... supplying its own corpus... its own six-type checker registry").
- * Compiles `themes/equivo/corpus/` through the platform's vault compiler and extracts each
- * room's exercises with Equivo's `extractEquivoExercises`. Writes the compiled World JSON to
+ * Compiles `themes/equivo/corpus/` through the platform's theme-agnostic `compileWing` with
+ * Equivo's real `extractEquivoExercises` extractor wired in -- the one piece `src/compile.mts`'s
+ * generic CLI entry point deliberately does NOT do (see that file's own header: "use a theme's
+ * own build script... for real exercise content"). Writes the compiled World JSON to
  * `data/world-equivo.json` (engine-side fixture, matching Lantern's own `data/world-weiqi.json`
  * precedent) and `web/data/equivo-world.json` (the deployed face's self-contained copy, per
  * `web/server.mjs`'s "never reach outside its own root" discipline).
@@ -12,7 +14,7 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { compileVault } from '@red-cup-engineering/education-platform-service/compile';
+import { compileWing } from '@red-cup-engineering/education-platform-service/compile';
 import { extractEquivoExercises } from './extract.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -20,8 +22,7 @@ const SERVICE_ROOT = join(HERE, '..', '..');
 const CORPUS_ROOT = join(HERE, 'corpus');
 
 export function buildEquivoWorld() {
-  const { world } = compileVault(CORPUS_ROOT, { id: 'equivo' }, { dialect: 'house' });
-  return { ...world, exercises: world.rooms.flatMap((room) => extractEquivoExercises(room)) };
+  return compileWing(CORPUS_ROOT, { id: 'equivo' }, extractEquivoExercises);
 }
 
 function main() {
