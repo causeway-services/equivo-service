@@ -3,7 +3,7 @@
  * suite runs, not a client-side mock (self-education-platform-service's own top-level guarantee).
  * `sync-vendor.mjs` produces the vendored `web/js/vendor/**` copies MECHANICALLY (Node's own
  * `stripTypeScriptTypes` on the real `.mts` sources, plus a byte-identical copy of the real
- * `@lenticule-science/metrologic` sources it depends on) rather than by a hand-written port -- so this test
+ * `@red-cup-engineering/metrologic` sources it depends on) rather than by a hand-written port -- so this test
  * doesn't compare two independently-written implementations against each other (that would only
  * prove they happen to agree), it compares the vendored OUTPUT against the same independently-
  * derived-from-real-math answers `themes/equivo/test/content-validate.test.mts` already uses,
@@ -20,7 +20,7 @@ import { fileURLToPath } from 'node:url';
 import { articulate, predicate, posit, settle } from '@red-cup-engineering/computer-systems-engineering-services-section/signcraft/descent';
 import { cohomologyOfCells } from '@red-cup-engineering/computer-networking-engineering-services-section/signgraph/cohomology';
 const cohomologyOfRelation = (cells) => { const r = cohomologyOfCells(cells); return { entities: r.entities, H0: { rank: r.zeroCohomology.rank }, H1: { rank: r.firstCohomology.rank } }; };
-import { settling, classify, h1 } from '@lenticule-science/metrologic/obstruction/settling';
+import { settling, classify, h1 } from '@red-cup-engineering/metrologic/obstruction/settling';
 
 import { hydrateExercises as hydrateReal } from '@red-cup-engineering/education-platform-service/checker';
 import { equivoCheckers as realCheckers } from '../../themes/equivo/registry.mjs';

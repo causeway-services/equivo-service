@@ -1,6 +1,6 @@
 /**
  * Equivo's checker registry -- equivo-design.md §3/§5. Six kinds, one checker per row of the
- * design's exercise-type table; every checker calls the real, unmodified `@lenticule-science/metrologic`
+ * design's exercise-type table; every checker calls the real, unmodified `@red-cup-engineering/metrologic`
  * pipeline the design's §5 worked examples were run against, never a hand-authored answer key.
  * An equivalence judgment the player makes IS a computation the math package verifies.
  *
@@ -20,7 +20,7 @@ import { readingOfSides } from '@red-cup-engineering/computer-data-engineering-s
 import { site } from '@red-cup-engineering/computer-networking-engineering-services-section/signgraph/site';
 import { cohomologyOfCells } from '@red-cup-engineering/computer-networking-engineering-services-section/signgraph/cohomology';
 import { settleCells } from '@red-cup-engineering/computer-systems-engineering-services-section/signcraft/settle';
-import { settling, classify, h1 } from '@lenticule-science/metrologic/obstruction/settling';
+import { settling, classify, h1 } from '@red-cup-engineering/metrologic/obstruction/settling';
 
 // ---------------------------------------------------------------------------------------
 // Shared helpers

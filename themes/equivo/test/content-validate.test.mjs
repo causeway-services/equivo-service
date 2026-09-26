@@ -2,7 +2,7 @@
  * Curriculum content validation -- the build's central "wrong content cannot ship" gate. Compiles
  * the REAL `themes/equivo/corpus/` (not a fixture) through the REAL compiler and REAL checker
  * registry, then for every compiled exercise INDEPENDENTLY re-derives the actual answer straight
- * from `@lenticule-science/metrologic` (never by calling the checker to ask itself what its own answer is --
+ * from `@red-cup-engineering/metrologic` (never by calling the checker to ask itself what its own answer is --
  * that would be circular) and asserts:
  *
  *   1. the independently-derived correct answer passes the exercise's real checker;
@@ -25,7 +25,7 @@ import { test, describe } from 'node:test';
 import { articulate, predicate, posit, settle } from '@red-cup-engineering/computer-systems-engineering-services-section/signcraft/descent';
 import { cohomologyOfCells } from '@red-cup-engineering/computer-networking-engineering-services-section/signgraph/cohomology';
 const cohomologyOfRelation = (cells) => { const r = cohomologyOfCells(cells); return { entities: r.entities, H0: { rank: r.zeroCohomology.rank }, H1: { rank: r.firstCohomology.rank } }; };
-import { settling, classify, h1 } from '@lenticule-science/metrologic/obstruction/settling';
+import { settling, classify, h1 } from '@red-cup-engineering/metrologic/obstruction/settling';
 import { buildEquivoWorld } from '../build-world.mjs';
 import { hydrateExercises, roomGateStatus } from '@red-cup-engineering/education-platform-service/checker';
 import { equivoCheckers, MVP_KINDS } from '../registry.mjs';

@@ -19,7 +19,7 @@ described below. iYappy deployment is underway; this document makes no public-le
 
 ## Kernel / theme split
 
-`src/` is theme-agnostic: nothing in it imports `@lenticule-science/metrologic` or knows the word "equivo".
+`src/` is theme-agnostic: nothing in it imports `@red-cup-engineering/metrologic` or knows the word "equivo".
 `themes/equivo/` is the only place that does. The generalization from Lantern's original
 five-module core (frontmatter, FCA, SRS, stability, lightcone-shaped types) is a *declaration*,
 not a code move -- `CardKind`'s closed five-value union became `kind: string`, `ReviewCard`
@@ -38,7 +38,7 @@ Equivo's exercises grade by running real math:
 ## Equivo's checker registry
 
 Six kinds (`themes/equivo/registry.mts`), one checker per row of the design's exercise-type
-table, every checker calling the real `@lenticule-science/metrologic` pipeline the design's §5 worked examples
+table, every checker calling the real `@red-cup-engineering/metrologic` pipeline the design's §5 worked examples
 were run against:
 
 | kind | real call | what the player supplies |
@@ -68,7 +68,7 @@ answer key.
 articulate/predicate/posit/settle → observe pipeline and end in one or more
 ` ```equivo-exercise ``` ` fenced JSON blocks), 30 exercises across five shipped kinds. The
 content-validation suite (`themes/equivo/test/content-validate.test.mts`) independently
-re-derives every exercise's actual answer straight from `@lenticule-science/metrologic` -- never by asking the
+re-derives every exercise's actual answer straight from `@red-cup-engineering/metrologic` -- never by asking the
 checker what its own answer is -- and asserts the derived-correct answer passes and a
 deliberately wrong one fails, for all 30. This is the "wrong content cannot ship" guarantee:
 a future corpus edit that produces an ambiguous or malformed spec fails this suite, not a
@@ -91,9 +91,9 @@ house "vendor a copy, not cross-import" doctrine, applied here at the browser bo
    Node >=24 (declared in `engines`), where the stripper is a stable public primitive; unlike
    Lantern's original pre-native-stripping `web/js/engine/*.js` hand ports, mechanical stripping
    carries no risk of the vendored copy drifting from its source.
-2. `@lenticule-science/metrologic`'s `bilattice` and `obstruction/{settling,cochain}` sources, copied
+2. `@red-cup-engineering/metrologic`'s `bilattice` and `obstruction/{settling,cochain}` sources, copied
    byte-identical (already zero-dependency, browser-safe ESM). `index.html`'s own
-   `<script type="importmap">` resolves the checker registry's bare `@lenticule-science/metrologic/...`
+   `<script type="importmap">` resolves the checker registry's bare `@red-cup-engineering/metrologic/...`
    specifiers to these vendored files -- no bundler, no CDN, no network origin beyond the page's
    own.
 

@@ -2,7 +2,7 @@
  * Direct unit tests of Equivo's checker registry (`themes/equivo/registry.mts`) -- one section per
  * exercise type, reproducing equivo-design.md §5's own worked examples (down to the printed
  * numbers) plus edge cases the design doc doesn't cover. Every assertion here runs the REAL
- * `@lenticule-science/metrologic` code, imported fresh in this file (not by calling into `registry.mts`'s own
+ * `@red-cup-engineering/metrologic` code, imported fresh in this file (not by calling into `registry.mts`'s own
  * helpers) -- an independent re-derivation, not a tautology that would pass even if the checker
  * silently stopped calling real math.
  */
@@ -11,7 +11,7 @@ import { test, describe } from 'node:test';
 import { articulate, predicate, posit, settle } from '@red-cup-engineering/computer-systems-engineering-services-section/signcraft/descent';
 import { cohomologyOfCells } from '@red-cup-engineering/computer-networking-engineering-services-section/signgraph/cohomology';
 const cohomologyOfRelation = (cells) => { const r = cohomologyOfCells(cells); return { entities: r.entities, H0: { rank: r.zeroCohomology.rank }, H1: { rank: r.firstCohomology.rank } }; };
-import { settling, classify, h1 } from '@lenticule-science/metrologic/obstruction/settling';
+import { settling, classify, h1 } from '@red-cup-engineering/metrologic/obstruction/settling';
 import {
   distinguishChecker,
   relateChecker,
