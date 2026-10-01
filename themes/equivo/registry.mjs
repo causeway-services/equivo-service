@@ -15,11 +15,11 @@
  * from the launch curriculum because no fair "genuine repair vs. evasion" rule exists yet; see
  * `repairChecker`'s own comment for the disclosed heuristic this build does NOT claim solves that.
  */
-import { cell, told, utterance } from '@red-cup-engineering/computer-data-engineering-services-section/signcell/cell';
-import { readingOfSides } from '@red-cup-engineering/computer-data-engineering-services-section/signcell/cell';
-import { site } from '@red-cup-engineering/computer-networking-engineering-services-section/signgraph/site';
-import { cohomologyOfCells } from '@red-cup-engineering/computer-networking-engineering-services-section/signgraph/cohomology';
-import { settleCells } from '@red-cup-engineering/computer-systems-engineering-services-section/signcraft/settle';
+import { cell, told, utterance } from '@red-cup-engineering/signcell/cell';
+import { readingOfSides } from '@red-cup-engineering/signcell/cell';
+import { site } from '@red-cup-engineering/signgraph/site';
+import { cohomologyOfCells } from '@red-cup-engineering/signgraph/cohomology';
+import { settleCells } from '@red-cup-engineering/signcraft/settle';
 import { settling, classify, h1 } from '@red-cup-engineering/metrologic/obstruction/settling';
 
 // ---------------------------------------------------------------------------------------

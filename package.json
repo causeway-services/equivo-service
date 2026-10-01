@@ -29,12 +29,14 @@
     "@red-cup-engineering/computer-code-engineering-services-section": "0.1.0",
     "@red-cup-engineering/computer-data-engineering-services-section": "0.1.0",
     "@red-cup-engineering/computer-networking-engineering-services-section": "0.1.0",
-    "@red-cup-engineering/computer-systems-engineering-services-section": "0.1.0",
     "@red-cup-engineering/computer-web-server": "0.6.0",
     "@red-cup-engineering/education-platform-service": "0.2.5",
     "@red-cup-engineering/icalendar-services-section": "0.1.0",
     "@red-cup-engineering/markdown-engineering-services-section": "0.5.0",
-    "@red-cup-engineering/web-page-tiling-engine": "0.12.0"
+    "@red-cup-engineering/web-page-tiling-engine": "0.12.0",
+    "@red-cup-engineering/signcell": "0.1.0",
+    "@red-cup-engineering/signgraph": "0.1.0",
+    "@red-cup-engineering/signcraft": "0.1.0"
   },
   "devDependencies": {
     "wrangler": "4.123.0"
