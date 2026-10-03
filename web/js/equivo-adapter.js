@@ -3,7 +3,7 @@ import { equivoCheckers, nameOfCharge } from './vendor/themes/equivo/registry.js
 import { equivoRegisters } from './vendor/themes/equivo/registers/index.js';
 import { renderTerm, isFullyAbsent } from './vendor/src/register.js';
 
-const REGIME_OPTIONS = ['finite', 'scott', 'transfinite', 'aperiodic'];
+const REGIME_OPTIONS = ['strict', 'scott', 'transfinite-bounded', 'aperiodic'];
 const LENS_KEY = 'education-platform:equivo:lens';
 const DEFAULT_LENS = 'equivo-obsmetrologia';
 

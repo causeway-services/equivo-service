@@ -25,14 +25,14 @@ and the settling's own cohomology tracks the difference exactly.
 
 **The four regimes**, read directly off a settling's firing structure:
 
-- **finite** — no limit stage at all. Everything accumulates by ordinary successor steps. H¹ = 0,
+- **strict** — no limit stage at all. Everything accumulates by ordinary successor steps. H¹ = 0,
   always — there's nothing a finite process can leave obstructed in this sense.
 - **scott** — there is a limit stage, but nothing new fires exactly at it (everything the limit
   stage "contains" was already reachable from stages before it — a Scott-continuous closure). Still
   H¹ = 0: the limit didn't contribute anything the finite stages hadn't already earned.
   \[Named for the same limit-preserving\-functions-are-what-matter idea as domain theory's
   Scott-continuity — the closure behaves as if the limit were redundant, because here it is.\]
-- **transfinite** — something genuinely new fires *at* the limit stage itself — a cell reachable
+- **transfinite-bounded** — something genuinely new fires *at* the limit stage itself — a cell reachable
   from no finite sub-stage. H¹ ≠ 0: each such cell is its own generator of the obstruction, a
   leftover no successor step could have produced on its own.
 - **aperiodic** — a settling explicitly declared to keep firing cofinally through an *uncountable*

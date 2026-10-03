@@ -34,7 +34,7 @@ independently, D/E/F cycling back to D. Two disjoint components, each one carryi
 **A settling to observe, plain**: four ordinary successor stages, no limit anywhere.
 
 **A settling to observe, with real structure**: a settling that reaches a limit stage where
-nothing fires (a Scott closure — don't be fooled into calling this transfinite just because it
+nothing fires (a Scott closure — don't be fooled into calling this transfinite-bounded just because it
 touched a limit stage at all), grows one more ordinary step, and *then* fires something new at a
 second limit stage.
 
@@ -93,7 +93,7 @@ second limit stage.
 That last exercise is the whole course in one scenario: touching a limit stage is not, by itself,
 an obstruction — the settling passes clean through its first limit with nothing new, exactly as
 the "scott" regime describes, and only the *second* limit, where a genuinely new cell fires, earns
-the transfinite classification and a nonzero H¹. Equivalence and obstruction are both read off
+the transfinite-bounded classification and a nonzero H¹. Equivalence and obstruction are both read off
 what actually happened in the structure, never off which stage merely *touched* a limit ordinal.
 
 If you cleared all five, you've completed a real pass through Equivo's core loop — not once, but
