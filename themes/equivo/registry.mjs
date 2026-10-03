@@ -15,7 +15,7 @@
  * from the launch curriculum because no fair "genuine repair vs. evasion" rule exists yet; see
  * `repairChecker`'s own comment for the disclosed heuristic this build does NOT claim solves that.
  */
-import { cell, sidesOf, utterance } from '@red-cup-engineering/signcell/cell';
+import { cell, claimValue, sidesOf, tokenValue, utterance } from '@red-cup-engineering/signcell/cell';
 import { readingOfSides } from '@red-cup-engineering/computer-data-engineering-services-section/four';
 import { site } from '@red-cup-engineering/signgraph/site';
 import { cohomologyOfCells } from '@red-cup-engineering/signgraph/cohomology';
@@ -59,7 +59,7 @@ export function distinguishChecker(spec, answer) {
   let result;
   try {
     const said = utterance(...spec.utterance);
-    result = { potential: [said.token, said.claim] };
+    result = { potential: [tokenValue(said), claimValue(said)] };
   } catch (err) {
     return { pass: false, diagnosis: `the utterance itself is malformed: ${err instanceof Error ? err.message : String(err)}` };
   }
