@@ -15,8 +15,8 @@
  * from the launch curriculum because no fair "genuine repair vs. evasion" rule exists yet; see
  * `repairChecker`'s own comment for the disclosed heuristic this build does NOT claim solves that.
  */
-import { cell, told, utterance } from '@red-cup-engineering/signcell/cell';
-import { readingOfSides } from '@red-cup-engineering/signcell/cell';
+import { cell, sidesOf, utterance } from '@red-cup-engineering/signcell/cell';
+import { readingOfSides } from '@red-cup-engineering/computer-data-engineering-services-section/four';
 import { site } from '@red-cup-engineering/signgraph/site';
 import { cohomologyOfCells } from '@red-cup-engineering/signgraph/cohomology';
 import { settleCells } from '@red-cup-engineering/signcraft/settle';
@@ -102,7 +102,7 @@ export function relateChecker(spec, answer) {
 export function measureChecker(spec, answer) {
   const settled = settleCells([utteranceCell(spec, { for: [spec.utterance] })]).settled[0];
   if (!settled) return { pass: false, diagnosis: 'the descent produced no settled cell -- malformed spec' };
-  const actual = told(settled);
+  const actual = sidesOf(settled);
   const pass = actual[0] === answer.value[0] && actual[1] === answer.value[1];
   return {
     pass,
