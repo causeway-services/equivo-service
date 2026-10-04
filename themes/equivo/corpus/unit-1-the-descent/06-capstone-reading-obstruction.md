@@ -9,34 +9,21 @@ keywords: ["equivo", "descent", "capstone"]
 date-created: 2026-08-20
 authors:
   - claude-fable-5
+date-updated: 2026-10-04
 ---
 
-You've now run every stage of the descent by hand at least once: articulate a scenario into a
-potential, relate it into a cell, measure the cell's charge, settle a relation and read H⁰ off its
-components, and observe a settling's regime and H¹ off its firing structure. This lesson doesn't
-teach anything new — it asks you to recognize which reading a fresh scenario calls for, and run it
-correctly, without the lesson telling you in advance which stage you're in.
+Choose the carrier before calculating its reading:
 
-That recognition is the actual skill "observing equivalence by measuring obstruction" names. It
-isn't one computation — it's knowing, from a scenario alone, whether the honest next move is to
-measure a charge, settle a relation, or classify a regime, and then actually running that
-computation rather than guessing at its shape.
+- A token and claim ask you to distinguish or relate them.
+- One witness for a reflexive claim supplies evidence sides `[true, false]`.
+- A finite edge list asks for connectivity. The checker calls one component “equivalent”; independent cycles are a separate reading.
+- A cumulative stage record asks for the marked-stage model's label and whether its limit-firing count is zero.
 
-**A charge to measure**: a single eyewitness claims the light was red. One witness, one claim —
-you've seen this shape three times now.
+A chain on four vertices has one component and no independent cycles. Two disjoint triangles have two components and two independent cycles. Neither result, by itself, judges the truth of a claim attached to those vertices.
 
-**A relation to settle**: four entities in a straight chain, A through D, each equivalent to the
-next. No branching, no cycle back.
+For the stage record, visiting a marked limit stage without adding a cell contributes nothing to the limit-firing count. If a later marked limit stage introduces a cell, the count becomes positive. With no uncountable-cofinal declaration, the model labels that case transfinite-bounded. This is a computation on the supplied record, not evidence that an infinite process occurred.
 
-**A relation to settle, with a twist**: two separate triangles — A/B/C cycling back to A, and,
-independently, D/E/F cycling back to D. Two disjoint components, each one carrying its own cycle.
-
-**A settling to observe, plain**: four ordinary successor stages, no limit anywhere.
-
-**A settling to observe, with real structure**: a settling that reaches a limit stage where
-nothing fires (a Scott closure — don't be fooled into calling this transfinite-bounded just because it
-touched a limit stage at all), grows one more ordinary step, and *then* fires something new at a
-second limit stage.
+The useful skill is to keep these distinctions when moving between examples. The two readings called H¹ belong to different supplied models; a common name does not make their carriers interchangeable. Completing this unit demonstrates practice with the thirty checks. It is not a certification of mathematical mastery or of real-world alignment.
 
 ```equivo-exercise
 [
@@ -89,15 +76,3 @@ second limit stage.
   }
 ]
 ```
-
-That last exercise is the whole course in one scenario: touching a limit stage is not, by itself,
-an obstruction — the settling passes clean through its first limit with nothing new, exactly as
-the "scott" regime describes, and only the *second* limit, where a genuinely new cell fires, earns
-the transfinite-bounded classification and a nonzero H¹. Equivalence and obstruction are both read off
-what actually happened in the structure, never off which stage merely *touched* a limit ordinal.
-
-If you cleared all five, you've completed a real pass through Equivo's core loop — not once, but
-across three progressively harder readings of it. The obstruction you measured in the two-triangle
-exercise and the transfinite settling above aren't different phenomena wearing the same name by
-coincidence: both are genuine leftovers, read off real structure, that no amount of local patching
-resolves. That's what "obstruction" means here, every time.

@@ -9,44 +9,23 @@ keywords: ["equivo", "descent", "observe"]
 date-created: 2026-08-20
 authors:
   - claude-fable-5
+date-updated: 2026-10-04
 ---
 
-Settling Equivalence read H⁰/H¹ off a *static* relation — a finished graph, all at once. This
-lesson reads a different, complementary structure: a **settling** — a relation as it accumulates
-*over time*, stage by stage, where each stage designates a cumulative set of cells and knowledge
-only ever grows, never shrinks.
+This lesson changes carriers. It supplies a **finite, marked stage record**, not the graph from Settling Equivalence. Each stage contains a cumulative set of designated cells. Designations cannot disappear. A `limit` marker is supplied as data; the browser does not run an infinite ordinal sequence to discover it.
 
-Some stages are ordinary **successor** stages — the next tick after the last one. Some are
-**limit** stages — a stage reached only by taking the union of everything before it, not by a
-single predecessor. This distinction is the entire content of this lesson: a cell that first
-appears at a limit stage was not obtainable from *any* finite sub-stage on its own. That's a
-genuinely different way for something to become true than "it followed from the previous step,"
-and the settling's own cohomology tracks the difference exactly.
+For each stage, subtract all previously designated cells to find the new ones. The model counts new cells at marked limit stages and names that count its **H¹ rank**. This is the repository's defined marked-stage reading; the course establishes no equivalence between it and the graph cohomology of the previous lesson.
 
-**The four regimes**, read directly off a settling's firing structure:
+## Predict the model's labels
 
-- **strict** — no limit stage at all. Everything accumulates by ordinary successor steps. H¹ = 0,
-  always — there's nothing a finite process can leave obstructed in this sense.
-- **scott** — there is a limit stage, but nothing new fires exactly at it (everything the limit
-  stage "contains" was already reachable from stages before it — a Scott-continuous closure). Still
-  H¹ = 0: the limit didn't contribute anything the finite stages hadn't already earned.
-  \[Named for the same limit-preserving\-functions-are-what-matter idea as domain theory's
-  Scott-continuity — the closure behaves as if the limit were redundant, because here it is.\]
-- **transfinite-bounded** — something genuinely new fires *at* the limit stage itself — a cell reachable
-  from no finite sub-stage. H¹ ≠ 0: each such cell is its own generator of the obstruction, a
-  leftover no successor step could have produced on its own.
-- **aperiodic** — a settling explicitly declared to keep firing cofinally through an *uncountable*
-  sequence of limit stages, never actually stabilizing. H¹ ≠ 0 and never vanishes, by
-  construction — this is the deepest regime the classifier recognizes, one only a declared
-  (not merely observed) cofinal firing pattern reaches.
+- **strict:** the record contains no marked limit stage.
+- **scott:** there are marked limit stages, but none introduces a new cell.
+- **transfinite-bounded:** at least one new cell appears at a marked limit stage, without the uncountable-cofinal declaration.
+- **aperiodic:** such a firing is present and the input also declares `cofinal: "uncountable"`.
 
-`classify` reads a settling's **depth** (the last stage anything fires, its closure ordinal) and
-its **regime** (which of the four above). `h1` reads the count of cells that fired *exactly* at a
-limit stage — the settling's own obstruction, read off its temporal firing structure rather than a
-static graph's connectivity (Settling Equivalence's reading and this lesson's reading are two
-different, complementary cohomologies of two different objects — a static relation versus a
-temporal accumulation — and it's a genuinely interesting fact, not a coincidence, that both are
-called H¹).
+The first two cases have rank zero; the last two have positive rank. Two new cells at the same marked limit stage contribute two to the count. The software's depth is its bounded reading of the last firing and the supplied markers.
+
+A finite record and a declaration do not prove uncountable cofinality, nonstabilization, mathematical Scott continuity, or physical aperiodicity. These exercise answers name cases of this particular classifier. Use the names with their carrier attached, and require additional evidence before applying them to an actual process.
 
 ```equivo-exercise
 [
@@ -98,9 +77,6 @@ called H¹).
 ]
 ```
 
-A quick review of the previous, static reading before you move on -- one more relation to settle,
-to keep the H⁰ question sharp alongside this lesson's temporal H¹ question:
-
 ```equivo-exercise
 {
   "kind": "settle",
@@ -111,10 +87,3 @@ to keep the H⁰ question sharp alongside this lesson's temporal H¹ question:
   ]
 }
 ```
-
-Pay particular attention to observe exercise 4 once you've cleared it: two cells firing at the *same*
-limit stage each count as their own generator — H¹ rank comes out **2**, not 1, even though it's
-tempting to think of "one limit stage" as "one obstruction." That's not a rounding quirk; it's the
-free abelian group on the newly-designated cells, counted exactly. A computation that surprises a
-naive expectation like this is exactly the kind of evidence that the classifier is really running,
-not narrating a pre-decided story.

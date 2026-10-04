@@ -4,15 +4,10 @@
   "type": "module",
   "description": "Equivo is a public course on obstruction-measurement mathematics, built from its authored course material and the reusable education platform.",
   "scripts": {
-    "test": "node --test themes/equivo/test/*.test.mjs web/test/*.test.mjs",
-    "build:world": "node themes/equivo/build-world.mjs",
-    "build:vendor": "node web/build/sync-vendor.mjs",
-    "build:web": "npm run build:world && npm run build:vendor",
-    "serve": "node web/server.mjs",
-    "test:web": "node --test web/test/*.test.mjs",
-    "verify:web": "npm run build:web && npm run test:web",
-    "deploy": "npm run build:web && wrangler deploy",
-    "dev": "npm run build:web && wrangler dev"
+    "build": "static-site-publisher build content public --config=victor.config.mjs",
+    "test": "node --test themes/equivo/test/*.test.mjs",
+    "deploy": "npm run build && wrangler deploy",
+    "dev": "npm run build && wrangler dev"
   },
   "engines": {
     "node": ">=24"
@@ -20,25 +15,20 @@
   "sideEffects": false,
   "files": [
     "themes",
-    "web",
-    "data/world-equivo.json",
+    "victor.config.mjs",
     "wrangler.jsonc"
   ],
   "dependencies": {
-    "@red-cup-engineering/metrologic": "0.3.0",
-    "@red-cup-engineering/computer-code-engineering-services-section": "0.1.0",
-    "@red-cup-engineering/computer-data-engineering-services-section": "0.1.0",
-    "@red-cup-engineering/computer-networking-engineering-services-section": "0.1.0",
-    "@red-cup-engineering/computer-web-server": "0.6.0",
     "@red-cup-engineering/education-platform-service": "0.2.5",
-    "@red-cup-engineering/icalendar-services-section": "0.1.0",
+    "@red-cup-engineering/metrologic": "0.3.0",
+    "@red-cup-engineering/static-site-publisher": "0.1.15",
     "@red-cup-engineering/markdown-engineering-services-section": "0.5.0",
-    "@red-cup-engineering/web-page-tiling-engine": "0.12.0",
     "@red-cup-engineering/signcell": "0.1.0",
     "@red-cup-engineering/signgraph": "0.1.0",
-    "@red-cup-engineering/signcraft": "0.1.0"
+    "@red-cup-engineering/computer-data-engineering-services-section": "0.1.0"
   },
   "devDependencies": {
-    "wrangler": "4.123.0"
+    "wrangler": "4.123.0",
+    "@red-cup-engineering/signcraft": "0.1.0"
   }
 }

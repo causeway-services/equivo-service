@@ -9,43 +9,29 @@ keywords: ["equivo", "descent", "measure"]
 date-created: 2026-08-20
 authors:
   - claude-fable-5
+date-updated: 2026-10-04
 ---
 
-A cell exists; now it gets **measured**. `posit` reads the evidence a cell has actually been
-given and assigns it a **charge** — one of four values, the bilattice's own vocabulary:
+A related cell carries evidence on two independent sides: evidence **for** its claim and evidence **against** it. Read whether each side is nonempty. The answer is `[for, against]`.
 
-| Charge | Knowledge bit | Truth bit | Meaning |
+| Software name | For | Against | Evidence reading |
 |---|---|---|---|
-| **absurd** | false | false | nothing asserted either way |
-| **potential** | true | false | asserted, not yet confirmed |
-| **active** | false | true | confirmed, not yet asserted with a positive witness |
-| **stable** | true | true | asserted *and* confirmed — both bits lit |
+| **absurd** | false | false | neither side is told |
+| **potential** | true | false | only the claim is supported |
+| **active** | false | true | only the claim's denial is supported |
+| **stable** | true | true | both sides are supported |
 
-The key discipline here, and the reason this stage is called *measuring* rather than *deciding*:
-`posit` never lets you stamp a value for free. It reads the charge off the evidence the cell
-actually carries — for a single freshly-related cell with exactly one witness (the token itself),
-that evidence supports **potential**, and nothing more. The claim has been made — that's real, and
-it's what the knowledge bit records. But nothing yet confirms it — no second, independent witness
-has weighed in — so the truth bit stays unlit. This isn't a limitation of the exercise; it's what
-one piece of evidence, honestly measured, actually earns. A single sensor reading, one favorable
-review, one rumor, one data point — each of these makes a real claim (potential), but none of them
-alone is enough to call the claim confirmed (stable). Confirming a claim takes a second,
-independent source settling into agreement with the first — which is exactly what
-**Settling Equivalence** starts to measure across *multiple* related
-cells at once, not just one.
+The names come from the software's knowledge reading; they are not ordinary-language judgments. In particular, **stable** here names conflicting evidence on both sides, not verified truth. The standard logical names for the same points are neither, true, false, and both. Truth and knowledge are orders on the four points, not the two checkbox coordinates.
 
-`settle` then runs this charge to its fixed point. For a single cell with no other cell to join or
-meet against, the fixed point is the charge it started at — there's nothing yet for it to settle
-*into*. This is worth predicting correctly precisely because it's tempting to overclaim: seeing
-"the bridge is structurally sound" asserted feels like it should count for something stronger than
-potential. The measurement says otherwise, honestly, every time — and the checker below runs the
-real computation, not a lesson author's intuition about how confident the scenario "sounds."
+Each exercise constructs one reflexive cell with one supplied witness **for** the claim and no witness against it. No inference or transport rule adds evidence, so its fixed point is already `[true, false]`. A second supporting witness would still leave the same two-bit reading: the bits record presence, not confidence or a witness count. Independent confirmation is not the second bit.
+
+A bridge-safety assertion in an exercise is only an assertion in this model. Measuring its evidence sides does not inspect a bridge or establish that assertion's truth. Predict the carrier the exercise actually supplies.
 
 ```equivo-exercise
 [
   {
     "kind": "measure",
-    "prompt": "A single sensor reading claims the bridge is structurally sound. What charge does this cell settle to — as a [knowledge, truth] pair?",
+    "prompt": "A single sensor reading claims the bridge is structurally sound. What charge does this cell settle to — as a [for, against] pair?",
     "utterance": ["a single sensor reading", "the bridge is structurally sound"]
   },
   {
@@ -65,14 +51,6 @@ real computation, not a lesson author's intuition about how confident the scenar
   }
 ]
 ```
-
-If you predicted **stable** for any of these, look again at what evidence the cell was actually
-given: one witness, asserting, with nothing yet confirming it independently. That gap — between
-what feels confirmed and what the measurement actually supports — is the entire reason a
-Duolingo-for-mathematics course exists at all: the discipline is learnable, and it's learnable
-specifically because the checker never grades on vibes.
-
-A quick review of the previous stage before you move on, relating one more scenario into its cell:
 
 ```equivo-exercise
 {

@@ -1,14 +1,9 @@
-/**
- * Direct unit tests of Equivo's checker registry (`themes/equivo/registry.mts`) -- one section per
- * exercise type, reproducing equivo-design.md §5's own worked examples (down to the printed
- * numbers) plus edge cases the design doc doesn't cover. Every assertion here runs the REAL
- * `@red-cup-engineering/metrologic` code, imported fresh in this file (not by calling into `registry.mts`'s own
- * helpers) -- an independent re-derivation, not a tautology that would pass even if the checker
- * silently stopped calling real math.
- */
+/** Independent carrier readings and checker disagreement cases. */
 import assert from 'node:assert/strict';
 import { test, describe } from 'node:test';
-import { articulate, predicate, posit, settle } from '@red-cup-engineering/computer-systems-engineering-services-section/signcraft/descent';
+import { cell, utterance, tokenValue, claimValue, sidesOf } from '@red-cup-engineering/signcell/cell';
+import { site } from '@red-cup-engineering/signgraph/site';
+import { settleCells } from '@red-cup-engineering/signcraft/settle';
 import { cohomologyOfCells } from '@red-cup-engineering/signgraph/cohomology';
 const cohomologyOfRelation = (cells) => { const r = cohomologyOfCells(cells); return { entities: r.entities, H0: { rank: r.zeroCohomology.rank }, H1: { rank: r.firstCohomology.rank } }; };
 import { settling, classify, h1 } from '@red-cup-engineering/metrologic/obstruction/settling';
@@ -37,8 +32,8 @@ describe('distinguishChecker (type A)', () => {
   const spec = { utterance: ['3-3 stone', 'corner-invasion'] };
 
   test('correct answer -- matches real articulate() output exactly', () => {
-    const real = articulate(spec.utterance);
-    const v = distinguishChecker(spec, { potential: real.potential });
+    const said = utterance(...spec.utterance);
+    const v = distinguishChecker(spec, { potential: [tokenValue(said), claimValue(said)] });
     assert.equal(v.pass, true);
     assert.match(v.diagnosis, /correct/);
   });
@@ -60,9 +55,9 @@ describe('relateChecker (type B)', () => {
   const spec = { utterance: ['a fossil layer', 'the site predates the eruption'] };
 
   test('correct answer -- matches real predicate(articulate()) structural output', () => {
-    const real = predicate(articulate(spec.utterance));
-    const cellSet = real['cell-set'];
-    const v = relateChecker(spec, { entities: cellSet['entity-set'].entities, predicates: cellSet['predicate-set'].predicates });
+    const [token, claim] = spec.utterance;
+    const related = site([cell(token, claim, token)]);
+    const v = relateChecker(spec, { entities: related.entities, predicates: related.predicates });
     assert.equal(v.pass, true);
   });
 
@@ -90,9 +85,9 @@ describe('measureChecker (type C) -- equivo-design.md §5.1', () => {
 
   test('independent re-derivation: for ANY two-element utterance, a bare descent always settles to potential -- a real structural fact about posit() seeding [T,F] with a single entity, not a checker assumption', () => {
     for (const u of [['x', 'y'], ['a rumor', 'the merger is happening'], ['sensor', 'sound']]) {
-      const settled = settle(posit(predicate(articulate(u))));
-      const cell = (settled).sheaf.section['fiber-algebras'][0]?.assignments[0];
-      assert.deepEqual(cell?.charge.value, [true, false]);
+      const [token, claim] = u;
+      const settled = settleCells([cell(token, claim, token, { for: [u] })]).settled[0];
+      assert.deepEqual(sidesOf(settled), [true, false]);
     }
   });
 });
@@ -131,36 +126,36 @@ describe('settleChecker (type D) -- equivo-design.md §5.2', () => {
     const real = cohomologyOfRelation(spec.cells);
     assert.equal(real.H0.rank, 1);
     assert.equal(real.H1.rank, 1);
-    assert.equal(real.H1.vanishes, false);
     // the checker's own claim is only about H0 (equivalence), so claim=true still passes even
-    // though the relation is separately obstructed -- exactly the distinction the corpus teaches.
+    // though the graph has a cycle; connectivity and cycle rank are distinct.
     assert.equal(settleChecker(spec, { claim: true }).pass, true);
   });
 });
 
 describe('observeChecker (type E) -- equivo-design.md §5.3', () => {
-  test('finite settling: regime finite, depth 2, H1 vanishes', () => {
+  test('unmarked record: regime strict, depth 2, H1 vanishes', () => {
     const spec = { stages: [
       { designated: ['a'] }, { designated: ['a', 'b'] }, { designated: ['a', 'b', 'c'] },
     ] };
     const v = settling(spec.stages, {});
-    assert.deepEqual(classify(v), { depth: 2, regime: 'finite' });
+    assert.equal(classify(v).depth, 2);
+    assert.equal(classify(v).regime, 'strict');
     assert.equal(h1(v).vanishes, true);
-    assert.equal(observeChecker(spec, { regime: 'finite', h1Vanishes: true }).pass, true);
-    assert.equal(observeChecker(spec, { regime: 'transfinite', h1Vanishes: false }).pass, false);
+    assert.equal(observeChecker(spec, { regime: 'strict', h1Vanishes: true }).pass, true);
+    assert.equal(observeChecker(spec, { regime: 'transfinite-bounded', h1Vanishes: false }).pass, false);
   });
 
-  test('transfinite settling with TWO cells firing at the same limit stage: H1 rank 2, reproducing the design doc\'s own "honest artifact"', () => {
+  test('two new cells at a marked limit: declared model H1 rank 2', () => {
     const spec = { stages: [
       { designated: ['a'] }, { designated: ['a', 'b'] },
       { designated: ['a', 'b', 'c', 'd'], limit: true },
     ] };
     const v = settling(spec.stages, {});
     const ob = h1(v);
-    assert.equal(classify(v).regime, 'transfinite');
+    assert.equal(classify(v).regime, 'transfinite-bounded');
     assert.equal(ob.rank, 2);
     assert.equal(ob.vanishes, false);
-    assert.equal(observeChecker(spec, { regime: 'transfinite', h1Vanishes: false }).pass, true);
+    assert.equal(observeChecker(spec, { regime: 'transfinite-bounded', h1Vanishes: false }).pass, true);
   });
 
   test('scott regime: a limit stage that fires nothing is NOT transfinite -- the naive-expectation trap the capstone lesson names explicitly', () => {

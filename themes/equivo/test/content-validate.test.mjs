@@ -22,7 +22,9 @@
  */
 import assert from 'node:assert/strict';
 import { test, describe } from 'node:test';
-import { articulate, predicate, posit, settle } from '@red-cup-engineering/computer-systems-engineering-services-section/signcraft/descent';
+import { cell, utterance, tokenValue, claimValue, sidesOf } from '@red-cup-engineering/signcell/cell';
+import { site } from '@red-cup-engineering/signgraph/site';
+import { settleCells } from '@red-cup-engineering/signcraft/settle';
 import { cohomologyOfCells } from '@red-cup-engineering/signgraph/cohomology';
 const cohomologyOfRelation = (cells) => { const r = cohomologyOfCells(cells); return { entities: r.entities, H0: { rank: r.zeroCohomology.rank }, H1: { rank: r.firstCohomology.rank } }; };
 import { settling, classify, h1 } from '@red-cup-engineering/metrologic/obstruction/settling';
@@ -38,19 +40,20 @@ const { exercises, unregisteredKinds } = hydrateExercises(world.exercises, equiv
 // --- independent re-derivation of the "actual" answer per kind, straight from real math --------
 
 function actualDistinguishAnswer(spec) {
-  return { potential: articulate(spec.utterance).potential };
+  const said = utterance(...spec.utterance);
+  return { potential: [tokenValue(said), claimValue(said)] };
 }
-
 function actualRelateAnswer(spec) {
-  const cellSet = (predicate(articulate(spec.utterance)))['cell-set'];
-  return { entities: cellSet['entity-set'].entities, predicates: cellSet['predicate-set'].predicates };
+  const [token, claim] = spec.utterance;
+  const related = site([cell(token, claim, token)]);
+  return { entities: related.entities, predicates: related.predicates };
 }
-
 function actualMeasureAnswer(spec) {
-  const settled = settle(posit(predicate(articulate(spec.utterance))));
-  const cell = (settled).sheaf.section['fiber-algebras'][0]?.assignments[0];
-  if (!cell) throw new Error('measure spec produced no settled cell');
-  return { value: cell.charge.value };
+  const [token, claim] = spec.utterance;
+  // Compare the reduced browser route with a full, independently constructed settlement.
+  const settled = settleCells([cell(token, claim, token, { for: [spec.utterance] })]).settled[0];
+  if (!settled) throw new Error('measure spec produced no settled cell');
+  return { value: sidesOf(settled) };
 }
 
 function actualSettleAnswer(spec) {
@@ -162,7 +165,7 @@ describe('gate minimum -- self-education-platform-design.md §4', () => {
   });
 });
 
-describe('the unit is a genuine single-file progression -- the 30+ minute arc is a graph property', () => {
+describe('the unit retains its single-file progression', () => {
   const order = [
     '00-welcome.md',
     '01-marks-and-utterances.md',

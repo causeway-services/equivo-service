@@ -1,7 +1,7 @@
 /** Equivo's policy and dependencies for the shared education browser runtime. */
-import { equivoCheckers, nameOfCharge } from './vendor/themes/equivo/registry.js';
-import { equivoRegisters } from './vendor/themes/equivo/registers/index.js';
-import { renderTerm, isFullyAbsent } from './vendor/src/register.js';
+import { equivoCheckers, readingOfValue as nameOfCharge } from './registry.mjs';
+import { equivoRegisters } from './registers/index.mjs';
+import { renderTerm, isFullyAbsent } from '@red-cup-engineering/education-platform-service/register';
 
 const REGIME_OPTIONS = ['strict', 'scott', 'transfinite-bounded', 'aperiodic'];
 const LENS_KEY = 'education-platform:equivo:lens';
@@ -61,7 +61,7 @@ function createAnswerForm(document, exercise) {
   }
   if (exercise.kind === 'measure') {
     const row = document.createElement('div'); row.className = 'toggle-row';
-    const inputs = ['knowledge bit lit (asserted)', 'truth bit lit (confirmed)'].map((label) => {
+    const inputs = ['evidence for the claim', 'evidence against the claim'].map((label) => {
       const input = document.createElement('input'); input.type = 'checkbox'; const wrapper = document.createElement('label'); wrapper.append(input, document.createTextNode(label)); row.appendChild(wrapper); return input;
     });
     const preview = document.createElement('p'); preview.className = 'charge-preview';
