@@ -3,6 +3,7 @@
   "displayName": "Equivo",
   "description": "Study evidence readings, graph connectivity and cycles, and a declared marked-stage model. Seven lessons share thirty exercises, saved practice, and three populated presentation lenses; the Lakotaean lens remains honestly absent.",
   "subdomain": "equivo",
+  "hostname": "equivo.play.561.group",
   "entryPoints": {
     "browser": "/"
   },
