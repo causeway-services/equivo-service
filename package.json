@@ -19,16 +19,16 @@
     "wrangler.jsonc"
   ],
   "dependencies": {
-    "@red-cup-engineering/education-platform-service": "0.2.5",
-    "@red-cup-engineering/metrologic": "0.3.0",
-    "@red-cup-engineering/static-site-publisher": "0.1.15",
-    "@red-cup-engineering/markdown-engineering-services-section": "0.5.0",
-    "@red-cup-engineering/signcell": "0.1.0",
-    "@red-cup-engineering/signgraph": "0.1.0",
-    "@red-cup-engineering/computer-data-engineering-services-section": "0.1.0"
+    "@red-cup-engineering/education-platform-service": "workspace:*",
+    "@red-cup-engineering/metrologic": "workspace:*",
+    "@red-cup-engineering/static-site-publisher": "workspace:*",
+    "@red-cup-engineering/markdown-engineering-services-section": "workspace:*",
+    "@red-cup-engineering/signcell": "workspace:*",
+    "@red-cup-engineering/signgraph": "workspace:*",
+    "@red-cup-engineering/computer-data-engineering-services-section": "workspace:*"
   },
   "devDependencies": {
     "wrangler": "4.123.0",
-    "@red-cup-engineering/signcraft": "0.1.0"
+    "@red-cup-engineering/signcraft": "workspace:*"
   }
 }
