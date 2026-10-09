@@ -1,0 +1,28 @@
+{
+  "id": "equivo",
+  "displayName": "Equivo",
+  "description": "Study evidence readings, graph connectivity and cycles, and a declared marked-stage model. Seven lessons share thirty exercises, saved practice, and three populated presentation lenses; the Lakotaean lens remains honestly absent.",
+  "subdomain": "equivo",
+  "hostname": "equivo.play.561.group",
+  "entryPoints": {
+    "browser": "/"
+  },
+  "seedPolicy": {
+    "kind": "on-demand"
+  },
+  "cartridgeWrapped": false,
+  "status": "playable",
+  "statusNote": "Unit 1: seven lessons and thirty exercises, with reading available without JavaScript. Exercise identities and existing save formats are preserved. Lessons distinguish conflicting evidence from confirmation, graph cycles from contradictions, and declared stage models from observed infinite processes. Later units are not yet authored.",
+  "shelf": "Study",
+  "intentLog": {
+    "schemaVersion": "none-v0"
+  },
+  "keywords": [
+    "mathematics",
+    "education",
+    "obstruction",
+    "spaced-repetition",
+    "equivalence",
+    "bilattice"
+  ]
+}

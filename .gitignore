@@ -1,0 +1,8 @@
+dist/
+web/js/app.js
+web/js/state.js
+web/js/markdown.js
+web/js/vendor/
+
+public/
+public.report.json
