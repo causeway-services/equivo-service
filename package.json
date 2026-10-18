@@ -1,0 +1,34 @@
+{
+  "name": "@causeway-services/equivo-service",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Equivo is a public course on obstruction-measurement mathematics, built from its authored course material and the reusable education platform.",
+  "scripts": {
+    "build": "static-site-publisher build content public --config=victor.config.mjs",
+    "test": "node --test themes/equivo/test/*.test.mjs",
+    "deploy": "npm run build && wrangler deploy",
+    "dev": "npm run build && wrangler dev"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "sideEffects": false,
+  "files": [
+    "themes",
+    "victor.config.mjs",
+    "wrangler.jsonc"
+  ],
+  "dependencies": {
+    "@red-cup-engineering/education-platform-service": "workspace:*",
+    "@red-cup-engineering/metrologic": "workspace:*",
+    "@red-cup-engineering/static-site-publisher": "workspace:*",
+    "@red-cup-engineering/markdown-engineering-services-section": "workspace:*",
+    "@red-cup-engineering/signcell": "workspace:*",
+    "@red-cup-engineering/signgraph": "workspace:*",
+    "@red-cup-engineering/computer-data-engineering-services-section": "workspace:*"
+  },
+  "devDependencies": {
+    "wrangler": "4.123.0",
+    "@red-cup-engineering/signcraft": "workspace:*"
+  }
+}
